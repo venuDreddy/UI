@@ -4,7 +4,7 @@ import { FitAddon } from 'xterm-addon-fit';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import 'xterm/css/xterm.css';
 
-export default function useTerminalLogic(containerId) {
+export default function useTerminalLogic(containerId,API_URL) {
   const terminalRef = useRef(null);
   const term = useRef(null);
   const ws = useRef(null);

@@ -4,7 +4,7 @@ import { Settings } from '../../components/Settings/Settings.jsx';
 import { handleLogout } from './profilepage.js';
 import { useNavigate } from 'react-router-dom';
 
-export const Profilepage = ({ active, setActive, navItems, href, token, setToken}) => {
+export const Profilepage = ({ active, setActive, navItems, href, token, setToken,API_URL}) => {
   const navigate = useNavigate();
   useEffect(() => {
     setToken(''||localStorage.getItem('Rstoken'));
@@ -22,7 +22,7 @@ export const Profilepage = ({ active, setActive, navItems, href, token, setToken
       
       </Settings>} */}
       <center>
-        <button className='button' onClick={()=>handleLogout(navigate)}> {token?"Log out":"Log in"}</button>
+        <button className='button' onClick={()=>handleLogout(navigate,API_URL)}> {token?"Log out":"Log in"}</button>
         </center> 
     </>
   );

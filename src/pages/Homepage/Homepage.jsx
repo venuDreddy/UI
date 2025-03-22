@@ -8,7 +8,7 @@ export function Homepage({
     navItems,
     href,
     token,
-    setToken
+    setToken,API_URL
 }){
     useEffect(() => {
         setToken(''||localStorage.getItem('Rstoken'));
@@ -16,9 +16,9 @@ export function Homepage({
       }, []);
     return (
         <div>
-        <Header active={active} setActive={setActive} navItems={navItems} href={href}/>
-        <HeroSection active={active} setActive={setActive}/>
-        <Dashboard token = {token} active={active} setActive={setActive}/>
+        <Header active={active} setActive={setActive} navItems={navItems} href={href} API_URL={API_URL}/>
+        <HeroSection active={active} setActive={setActive} API_URL={API_URL}/>
+        <Dashboard token = {token} active={active} setActive={setActive} API_URL={API_URL}/>
         <center>
 
         {token == undefined ? (

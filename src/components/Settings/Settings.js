@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:5000/api/auth'; // Adjust the base URL
 
 // Function to fetch user profile data
-export const fetchUserData = async (navigate) => {
+export const fetchUserData = async (navigate,API_URL) => {
   try {
     const token = localStorage.getItem('Rstoken');
     if (!token) {
@@ -11,7 +11,7 @@ export const fetchUserData = async (navigate) => {
       return;
     }
 
-    const response = await axios.get(`${API_BASE_URL}/user`, {
+    const response = await axios.get(`${API_URL}/user`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -24,7 +24,7 @@ export const fetchUserData = async (navigate) => {
 };
 
 // Function to update user profile
-export const updateUserProfile = async (userData, navigate) => {
+export const updateUserProfile = async (userData, navigate,API_URL) => {
   try {
     const token = localStorage.getItem('Rstoken');
     if (!token) {
@@ -32,7 +32,7 @@ export const updateUserProfile = async (userData, navigate) => {
       return;
     }
 
-    const response = await axios.put(`${API_BASE_URL}/user/update`, userData, {
+    const response = await axios.put(`${API_URL}/user/update`, userData, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -44,7 +44,7 @@ export const updateUserProfile = async (userData, navigate) => {
 };
 
 // Function to delete user account
-export const deleteUserAccount = async (navigate) => {
+export const deleteUserAccount = async (navigate,API_URL) => {
   try {
     const token = localStorage.getItem('Rstoken');
     if (!token) {
@@ -52,7 +52,7 @@ export const deleteUserAccount = async (navigate) => {
       return;
     }
 
-    await axios.delete(`${API_BASE_URL}/user/delete`, {
+    await axios.delete(`${API_URL}/user/delete`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

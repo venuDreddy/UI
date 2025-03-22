@@ -48,6 +48,7 @@ const Workspace = ({ containerId, setContainerId, API_URL }) => {
                   height="100%"
                   theme="vs-dark"
                   value={fileContent}
+                  API_URL={API_URL}
                   onChange={(value) => setFileContent(value)}
                 />
               </div>
@@ -58,7 +59,7 @@ const Workspace = ({ containerId, setContainerId, API_URL }) => {
             <Panel defaultSize={50} minSize={15} maxSize={95}>
               <div className="p-3 bg-gray-700 h-full">
                 <h3 className="text-lg font-semibold mb-3">Terminal</h3>
-                <TerminalComponent containerId={containerId} />
+                <TerminalComponent containerId={containerId} API_URL={API_URL} />
               </div>
             </Panel>
           </PanelGroup>

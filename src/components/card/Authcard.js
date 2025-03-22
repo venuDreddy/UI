@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const handleSubmit = async (
   e,
@@ -9,48 +9,51 @@ export const handleSubmit = async (
   confirmPassword,
   setError,
   setLoading,
-  navigate // Add navigate as a parameter
+  navigate,
+  API_URL // Add navigate as a parameter
 ) => {
   e.preventDefault();
-  setError('');
+  setError("");
   setLoading(true);
 
   // Validation
-  if (!email.includes('@')) {
-    setError('Please enter a valid email.');
+  if (!email.includes("@")) {
+    setError("Please enter a valid email.");
     setLoading(false);
     return;
   }
   if (password.length < 6) {
-    setError('Password must be at least 6 characters long.');
+    setError("Password must be at least 6 characters long.");
     setLoading(false);
     return;
   }
-  if (!isLogin && name.trim() === '') {
-    setError('Name cannot be empty.');
+  if (!isLogin && name.trim() === "") {
+    setError("Name cannot be empty.");
     setLoading(false);
     return;
   }
   if (!isLogin && password !== confirmPassword) {
-    setError('Passwords do not match.');
+    setError("Passwords do not match.");
     setLoading(false);
     return;
   }
 
   try {
-    const url = isLogin ? 'http://localhost:8080/api/auth/login' : 'http://localhost:8080/api/auth/signup';
-    const data = isLogin ? { email, password } : { username:name, email, password };
+    const url = isLogin ? API_URL + "/auth/login" : API_URL + "/auth/signup";
+    const data = isLogin
+      ? { email, password }
+      : { username: name, email, password };
     const response = await axios.post(url, data);
 
     if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('Rstoken', response.data.token); // Store token for authentication
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("Rstoken", response.data.token); // Store token for authentication
     }
 
-    alert(isLogin ? 'Login successful!' : 'Signup successful!');
-    navigate('/#dashboard'); // Use navigate to redirect
+    alert(isLogin ? "Login successful!" : "Signup successful!");
+    navigate("/#dashboard"); // Use navigate to redirect
   } catch (err) {
-    setError(err.response?.data?.error || 'Something went wrong');
+    setError(err.response?.data?.error || "Something went wrong");
   } finally {
     setLoading(false);
   }

@@ -6,7 +6,8 @@ export function Providerdashboard({
     navItems,
     href,
     token,
-    setToken
+    setToken,
+    API_URL
 }){
     useEffect(() => {
         setToken(''||localStorage.getItem('Rstoken'));
@@ -14,7 +15,7 @@ export function Providerdashboard({
       }, []);
     return (
         <div>
-        <Dashboard token = {token} active={active} setActive={setActive}/>
+        <Dashboard token = {token} active={active} setActive={setActive} API_URL={API_URL}/>
         </div>
     );
 } 

@@ -1,4 +1,4 @@
-export const fetchProfileData = async (navigate) => {
+export const fetchProfileData = async (navigate,API_URL) => {
   const token = localStorage.getItem('Rstoken');
 
   if (!token) {
@@ -7,7 +7,7 @@ export const fetchProfileData = async (navigate) => {
   }
 
   try {
-    const response = await fetch('http://localhost:5000/api/profile', {
+    const response = await fetch(API_URL+'/profile', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

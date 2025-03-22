@@ -28,8 +28,8 @@ export function App() {
             href={href}
             setToken = {setToken}
           />} />
-        <Route path="/login" element={<AuthPage login={true} />} />
-        <Route path="/signup" element={<AuthPage login={false} />} />
+        <Route path="/login" element={<AuthPage login={true} API_URL={API_URL} />} />
+        <Route path="/signup" element={<AuthPage login={false} API_URL={API_URL}/>} />
         <Route path="/profile" element={
           <Profilepage
             active={active}
@@ -38,6 +38,7 @@ export function App() {
             navItems={navItems}
             href={href}
             setToken={setToken}
+            API_URL={API_URL}
           />} />
         <Route path="/providers" element={
           <ProvidersList
@@ -61,6 +62,7 @@ export function App() {
             navItems={navItems}
             href={href}
             setToken={setToken}
+            API_URL={API_URL}
           />} />
           <Route path="/createContainer" element={
           <DockerConsumer

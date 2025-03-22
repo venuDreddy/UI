@@ -12,10 +12,10 @@ export const Profile = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect((API_URL) => {
     const loadProfile = async () => {
       try {
-        const data = await fetchProfileData(navigate);
+        const data = await fetchProfileData(navigate,API_URL);
         setProfileData(data);
       } catch (error) {
         console.error(error);

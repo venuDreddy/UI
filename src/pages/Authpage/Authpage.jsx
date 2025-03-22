@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AuthCard } from '../../components/card/Authcard.jsx';
 
-export const AuthPage = ({ login }) => {
+export const AuthPage = ({ login,API_URL }) => {
   const [isLogin, setIsLogin] = useState(login);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,6 +24,7 @@ export const AuthPage = ({ login }) => {
         setPassword={setPassword}
         confirmPassword={confirmPassword}
         setConfirmPassword={setConfirmPassword}
+        API_URL={API_URL}
       />
     </div>
   );

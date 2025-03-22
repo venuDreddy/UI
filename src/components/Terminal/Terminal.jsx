@@ -2,7 +2,7 @@ import React from 'react';
 import useTerminalLogic from './Terminal.js';
 import './Terminal.css';
 
-export default function TerminalComponent({ containerId }) {
+export default function TerminalComponent({ containerId,API_URL }) {
   const terminalRef = useTerminalLogic(containerId);
 
   return (

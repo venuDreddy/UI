@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUserData, updateUserProfile, deleteUserAccount } from './Settings.js';
 import './Settings.css';
 
-export function Settings({ token }) {
+export function Settings({ token,API_URL }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
@@ -19,7 +19,7 @@ export function Settings({ token }) {
     const loadUserData = async () => {
       setLoading(true);
       try {
-        const userData = await fetchUserData(token);
+        const userData = await fetchUserData(token,API_URL);
         setName(userData.name || '');
         setEmail(userData.email || '');
       } catch (error) {
@@ -44,7 +44,7 @@ export function Settings({ token }) {
 
     setLoading(true);
     try {
-      await updateUserProfile(token, { name, currentPassword, newPassword });
+      await updateUserProfile(token, { name, currentPassword, newPassword },API_URL);
       alert('Profile updated successfully!');
     } catch (error) {
       setError('Error updating profile!');
@@ -59,7 +59,7 @@ export function Settings({ token }) {
     if (window.confirm('Are you sure you want to delete your account?')) {
       setLoading(true);
       try {
-        await deleteUserAccount(token);
+        await deleteUserAccount(token,API_URL);
         alert('Account deleted successfully!');
         navigate('/login'); // Redirect after deletion
       } catch (error) {

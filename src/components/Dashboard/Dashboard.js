@@ -1,10 +1,11 @@
 export const fetchSystemUsage = async (
   setCpuUsed,
   setMemoryUsed,
-  setRamUsed
+  setRamUsed,
+  API_URL
 ) => {
   try {
-    const response = await fetch('http://localhost:5000/api/system-usage');
+    const response = await fetch(API_URL+'/system-usage');
     if (!response.ok) throw new Error('Failed to fetch system usage');
 
     const data = await response.json();
@@ -16,7 +17,7 @@ export const fetchSystemUsage = async (
   }
 };
 
-export const fetchBatteryStatus = async (setBattery) => {
+export const fetchBatteryStatus = async (setBattery,API_URL) => {
   if ('getBattery' in navigator) {
     const battery = await navigator.getBattery();
     setBattery(Math.floor(battery.level * 100));

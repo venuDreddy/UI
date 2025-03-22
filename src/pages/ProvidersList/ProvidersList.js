@@ -1,6 +1,6 @@
-export const fetchProvidersList = async () => {
+export const fetchProvidersList = async (API_URL) => {
   // try {
-  //   const response = await fetch('http://localhost:5000/api/providers'); // Adjust the endpoint if needed
+  //   const response = await fetch(API_URL+'/providers'); // Adjust the endpoint if needed
   //   if (!response.ok) throw new Error('Failed to fetch providers');
   //   return await response.json();
   // } catch (error) {
