@@ -1,0 +1,14 @@
+.provider-stats button{
+    background-color: 4CAF50;
+    padding: 5px;
+    width: max-content;
+    margin: 20px auto;
+}
+.provider{
+ padding: 10px;
+ margin: 10px;
+ width: max-content;
+}
+.provider .name{
+    margin-right: 50px;
+}
