@@ -2,7 +2,7 @@ import React from "react";
 import useDockerCreate from "./DockerCreate.js";
 import "./DockerCreate.css";
 
-function DockerCreate({ setContainerId, API_URL, providerId }) {
+function DockerCreate({ setContainerId, API_URL, providerId, containerId }) {
   const {
     containers,
     imageName,
@@ -12,8 +12,7 @@ function DockerCreate({ setContainerId, API_URL, providerId }) {
     fetchContainers,
     pullImage,
     createContainer,
-  } = useDockerCreate(setContainerId, API_URL, providerId);
-
+  } = useDockerCreate(setContainerId, API_URL, providerId, containerId);
   return (
     <div className='CreateContainer p-6'>
       <h2 className='text-2xl font-bold mb-4 '>Docker Consumer</h2>

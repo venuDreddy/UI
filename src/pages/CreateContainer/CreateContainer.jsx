@@ -9,6 +9,8 @@ const DockerConsumer = ({ API_URL, containerId, setContainerId }) => {
   }, [containerId]);
   let { providerId } = useParams();
   console.log(providerId);
+  // containerId = sessionStorage.getItem(containerId);
+  // console.log(containerId);
 
   return containerId ? (
     <Workspace
@@ -22,6 +24,7 @@ const DockerConsumer = ({ API_URL, containerId, setContainerId }) => {
       setContainerId={setContainerId}
       API_URL={API_URL}
       providerId={providerId}
+      containerId={containerId}
     />
   );
 };

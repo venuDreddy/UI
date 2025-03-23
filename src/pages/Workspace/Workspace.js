@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
   const [files, setFiles] = useState([]);
-  const [currentFile, setCurrentFile] = useState('');
-  const [fileContent, setFileContent] = useState('');
-  const token = localStorage.getItem('token');
+  const [currentFile, setCurrentFile] = useState("");
+  const [fileContent, setFileContent] = useState("");
+  const token = localStorage.getItem("token");
 
   // Fetch files in the root directory
   const fetchFiles = async () => {
     try {
       const response = await axios.post(
-        API_URL + '/api/docker/files/list',
-        { containerId, dirPath: '/app' },
+        API_URL + "/providers/files/list",
+        { containerId, dirPath: "/app" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setFiles(response.data.files.split('\n'));
+      setFiles(response.data.files.split("\n"));
     } catch (err) {
       console.error(err.message);
     }
@@ -24,11 +24,11 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
   // Read a file
   const readFile = async (file) => {
     try {
-      const newFile = file.replace(/[^\x20-\x7E]/g, '');
+      const newFile = file.replace(/[^\x20-\x7E]/g, "");
       const response = await axios.post(
-        API_URL + '/api/docker/files/read',
-        { containerId, filePath: '/app/' + newFile },
-        { headers: { Authorization: `Bearer ${token}` }, responseType: 'json' }
+        API_URL + "/providers/files/read",
+        { containerId, filePath: "/app/" + newFile },
+        { headers: { Authorization: `Bearer ${token}` }, responseType: "json" }
       );
       let newFileContent = response.data.content;
       while (newFileContent.length > 0 && newFileContent.charCodeAt(0) <= 31) {
@@ -45,9 +45,9 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
   const saveFile = async () => {
     let fileToSave = currentFile;
     if (!currentFile) {
-      const newFile = prompt('Please enter a file name:');
+      const newFile = prompt("Please enter a file name:");
       if (!newFile) {
-        alert('File name cannot be empty');
+        alert("File name cannot be empty");
         return;
       }
       fileToSave = newFile;
@@ -55,8 +55,8 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
     }
     try {
       await axios.post(
-        API_URL + '/api/docker/files/write',
-        { containerId, filePath: '/app/' + fileToSave, content: fileContent },
+        API_URL + "/providers/files/write",
+        { containerId, filePath: "/app/" + fileToSave, content: fileContent },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       await fetchFiles();
@@ -69,11 +69,11 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
   const exit = async () => {
     try {
       await axios.post(
-        API_URL + `/api/docker/containers/${containerId}/stop`,
+        API_URL + `/providers/containers/${containerId}/stop`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setContainerId('');
+      setContainerId("");
     } catch (err) {
       console.error(err);
     }
