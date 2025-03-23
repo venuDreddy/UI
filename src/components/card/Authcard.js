@@ -40,9 +40,7 @@ export const handleSubmit = async (
 
   try {
     const url = isLogin ? API_URL + "/auth/login" : API_URL + "/auth/signup";
-    const data = isLogin
-      ? { email, password }
-      : { username: name, email, password };
+    const data = isLogin ? { email, password } : { name, email, password };
     const response = await axios.post(url, data);
 
     if (response.data.token) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useDockerCreate = (setContainerId, API_URL) => {
+const useDockerCreate = (setContainerId, API_URL, providerId) => {
   const [containers, setContainers] = useState([]);
   const [imageName, setImageName] = useState("");
   const [password, setPassword] = useState("");
@@ -9,9 +9,13 @@ const useDockerCreate = (setContainerId, API_URL) => {
   const fetchContainers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(API_URL + "/providers/containers", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        API_URL + "/providers/containers",
+        { providerId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setContainers(response.data.containers);
     } catch (err) {
       console.error(err);
@@ -23,10 +27,11 @@ const useDockerCreate = (setContainerId, API_URL) => {
       const token = localStorage.getItem("token");
       // console.log(token);
       // let providerID="localhost";
+      console.log(providerId);
 
       await axios.post(
         API_URL + "/providers/images/pull",
-        { imageName },
+        { imageName, providerId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert(`Image ${imageName} pulled successfully`);
@@ -44,7 +49,7 @@ const useDockerCreate = (setContainerId, API_URL) => {
 
       const response = await axios.post(
         API_URL + "/providers/containers/create",
-        { imageName },
+        { imageName, providerId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setContainerId(response.data.container_id);

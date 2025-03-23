@@ -43,17 +43,21 @@ export const ProvidersList = ({
       />
       <div className='providers-list flex flex-col justify-center items-center'>
         {providersList.length > 0 ? (
-          providersList.map((provider) => (
-            <Provider
-              key={provider.id}
-              provider={provider}
-              API_URL={API_URL}
-              providerId={providerId}
-              containerId={containerId}
-              setProviderId={setProviderId}
-              setContainerId={setContainerId}
-            />
-          ))
+          providersList.map((provider) => {
+            console.log(provider.providerID);
+
+            return (
+              <Provider
+                key={provider.providerID}
+                provider={provider}
+                API_URL={API_URL}
+                providerId={provider.providerID}
+                containerId={containerId}
+                setProviderId={setProviderId}
+                setContainerId={setContainerId}
+              />
+            );
+          })
         ) : (
           <p>Loading providers...</p>
         )}
