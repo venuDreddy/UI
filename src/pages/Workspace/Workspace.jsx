@@ -18,7 +18,7 @@ const Workspace = ({ containerId, setContainerId, API_URL, providerId }) => {
     saveFile,
     exit,
     setFileContent,
-  } = useWorkspaceLogic(containerId, setContainerId, API_URL);
+  } = useWorkspaceLogic(containerId, setContainerId, API_URL, providerId);
 
   return (
     <div className='Workspace flex flex-col h-screen w-screen bg-gray-900 text-white'>

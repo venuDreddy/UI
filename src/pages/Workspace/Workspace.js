@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
+const useWorkspaceLogic = (
+  containerId,
+  setContainerId,
+  API_URL,
+  providerId
+) => {
   const [files, setFiles] = useState([]);
   const [currentFile, setCurrentFile] = useState("");
   const [fileContent, setFileContent] = useState("");
@@ -12,7 +17,7 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
     try {
       const response = await axios.post(
         API_URL + "/providers/files/list",
-        { containerId, dirPath: "/app" },
+        { providerId, containerId, path: "/app" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setFiles(response.data.files.split("\n"));
@@ -27,7 +32,7 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
       const newFile = file.replace(/[^\x20-\x7E]/g, "");
       const response = await axios.post(
         API_URL + "/providers/files/read",
-        { containerId, filePath: "/app/" + newFile },
+        { providerId, containerId, path: "/app/" + newFile },
         { headers: { Authorization: `Bearer ${token}` }, responseType: "json" }
       );
       let newFileContent = response.data.content;
@@ -56,7 +61,12 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
     try {
       await axios.post(
         API_URL + "/providers/files/write",
-        { containerId, filePath: "/app/" + fileToSave, content: fileContent },
+        {
+          providerId,
+          containerId,
+          path: "/app/" + fileToSave,
+          content: fileContent,
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       await fetchFiles();
@@ -70,7 +80,7 @@ const useWorkspaceLogic = (containerId, setContainerId, API_URL) => {
     try {
       await axios.post(
         API_URL + `/providers/containers/${containerId}/stop`,
-        {},
+        { providerId, containerId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setContainerId("");

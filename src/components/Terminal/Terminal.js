@@ -35,6 +35,9 @@ export default function useTerminalLogic(containerId, providerId) {
         ws.current = new W3CWebSocket(
           `ws://localhost:8080/api/providers/provider/${providerId}/${containerId}/terminal`
         );
+        console.log(
+          `ws://localhost:8080/api/providers/provider/${providerId}/${containerId}/terminal`
+        );
 
         // WebSocket event handlers
         ws.current.onopen = () => {
